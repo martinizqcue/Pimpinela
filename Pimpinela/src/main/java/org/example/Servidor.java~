@@ -1,0 +1,60 @@
+package org.example;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Servidor {
+    
+    public static void main(String[] args) {
+
+        ServerSocket servidor = null;
+        Socket socket = null;
+        DataInputStream in;
+        DataOutputStream out;
+
+        int puerto = 5000;
+
+        try {
+            servidor = new ServerSocket(puerto);
+            System.out.println("Servidor iniciado");
+
+            while (true) {
+                socket = servidor.accept();
+                System.out.println("Cliente conectado");
+                in = new DataInputStream(socket.getInputStream());
+                out = new DataOutputStream(socket.getOutputStream());
+
+                boolean finalizar = false;
+                while (!finalizar) {
+                    String mensaje = in.readUTF();
+                    System.out.println("Cliente: " + mensaje);
+
+                    switch (mensaje) {
+                        case "¿Quién es?":
+                            out.writeUTF("Soy yo");
+                            break;
+                        case "¿Qué vienes a buscar?":
+                            out.writeUTF("A ti");
+                            break;
+                        case "Ya es tarde":
+                            out.writeUTF("¿Por qué?");
+                            break;
+                        case "Porque ahora soy yo la que quiere estar sin ti":
+                            out.writeUTF("Por eso vete, olvida mi nombre, mi cara, mi casa y pega la vuelta");
+                            finalizar = true;
+                            break;
+                        default:
+                            out.writeUTF("Error");
+                    }
+                }
+                System.out.println("Cliente desconectado");
+                socket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
