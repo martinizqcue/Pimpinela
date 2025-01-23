@@ -6,8 +6,14 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Servidor {
 
+public class Servidor {
+    /**
+     * Método principal que inicia el servidor y gestiona las interacciones con el cliente.
+     * @param args
+     * @throws IOException
+     *
+     */
     public static void main(String[] args) {
         ServerSocket servidor = null;
         Socket socket = null;

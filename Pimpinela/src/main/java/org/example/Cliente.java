@@ -8,6 +8,13 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Cliente {
+    /**
+     *Método principal que gestiona la conexión con el servidor y permite enviar mensajes.
+     * @param args
+     * @throws IOException
+     * @throws UnknownHostException
+     *
+     */
     public static void main(String[] args) {
 
         String host = "127.0.0.1";
